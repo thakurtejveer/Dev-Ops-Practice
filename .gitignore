@@ -1,0 +1,34 @@
+# Ignore Maven build output
+/target/
+# Ignore IntelliJ IDEA project files
+/.idea/
+/*.iml
+# Ignore Eclipse project files
+/.project
+/.classpath
+/.settings/
+/bin/
+/build/
+/out/
+# Ignore Mac system files
+.DS_Store
+# Ignore log files
+*.log
+# Ignore temporary files created by the IDE
+*.swp
+*.swo
+# Ignore compiled Java classes
+*.class
+# Ignore Java package distribution
+*.jar
+*.war
+*.ear
+# Ignore compiled files
+*.class
+# Ignore local configuration files
+*.local
+# Ignore test directories
+/test-outputs/
+/test-reports/
+/target/test-classes/
+

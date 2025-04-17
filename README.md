@@ -1,2 +1,2 @@
 # Dev-Ops-Practice
-This is to practice docker devops
+This is to practice devops

@@ -1,26 +1,37 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.9.4-openjdk-17'
-        }
+    agent any
+
+    environment {
+        IMAGE_NAME = 'springboot-app'
+        CONTAINER_NAME = 'springboot-container'
     }
 
     stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/thakurtejveer/Dev-Ops-Practice.git'
+            }
+        }
+
         stage('Build') {
             steps {
                 sh 'mvn clean package -DskipTests'
             }
         }
 
-        stage('Docker Build') {
+        stage('Build Docker Image') {
             steps {
-                sh 'docker build -t springboot-app .'
+                sh 'docker build -t $IMAGE_NAME .'
             }
         }
 
-        stage('Run Container') {
+        stage('Deploy Docker Container') {
             steps {
-                sh 'docker run -d -p 8080:8080 --name springboot-app springboot-app'
+                sh '''
+                    docker stop $CONTAINER_NAME || true
+                    docker rm $CONTAINER_NAME || true
+                    docker run -d -p 8080:8080 --name $CONTAINER_NAME $IMAGE_NAME
+                '''
             }
         }
     }

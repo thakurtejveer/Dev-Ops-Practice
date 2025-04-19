@@ -26,10 +26,9 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build, Test & Package') {
             steps {
-                echo "⚙️ Building the project with Maven..."
-                sh 'mvn clean compile'
+                sh 'mvn clean verify'
             }
         }
 

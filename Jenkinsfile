@@ -28,8 +28,15 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo "⚙️ Starting Maven build..."
-                sh 'mvn clean package -DskipTests'
+                echo "⚙️ Building the project with Maven..."
+                sh 'mvn clean compile'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                echo "🧪 Running unit tests..."
+                sh 'mvn test'
             }
         }
 
@@ -59,10 +66,10 @@ pipeline {
 
     post {
         success {
-            echo '✅ Build and deploy successful!'
+            echo '✅ Build, test, and deploy successful!'
         }
         failure {
-            echo '❌ Build failed! Please check logs above.'
+            echo '❌ Something failed! Check logs above.'
         }
     }
 }
